@@ -29,10 +29,6 @@ interface FormData {
     amount: string;
 }
 
-type TransactionTypeProps = {
-    type: 'up' | 'down';
-}
-
 const schema = Yup.object().shape({
     name: Yup
         .string()

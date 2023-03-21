@@ -2,7 +2,9 @@ import { useCallback, useState } from "react";
 import { Alert, FlatList, ActivityIndicator } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { getBottomSpace } from "react-native-iphone-x-helper";
+
 import { useTheme } from "styled-components";
+import { useAuth } from "../../hooks/auth";
 
 import {
     Container,
@@ -46,6 +48,7 @@ export function Dashboard() {
     const navigation = useNavigation();
 
     const theme = useTheme();
+    const { user, signOut } = useAuth();
 
     const [isLoading, setIsLoading] = useState(true);
     const [transactions, setTransactions] = useState<TransactionsStorageDTO[]>([]);
@@ -194,6 +197,14 @@ export function Dashboard() {
         loadTransactions();
     }
 
+    function handleLogout() {
+
+        Alert.alert("Sair", "Deseja realmente sair da aplicação?", [
+            { text: "Não", style: "cancel" },
+            { text: "Sim", onPress: signOut },
+        ]);
+    }
+
     useFocusEffect(
         useCallback(() => {
             loadTransactions();
@@ -215,13 +226,14 @@ export function Dashboard() {
                     <Header>
                         <UserWrapper>
                             <UserInfo>
-                                <Photo source={{ uri: 'https://github.com/ighorsantiago.png' }} />
+                                {/* <Photo source={{ uri: 'https://github.com/ighorsantiago.png' }} /> */}
+                                <Photo source={{ uri: user.photo }} />
                                 <User>
                                     <UserGreeting>Olá,</UserGreeting>
-                                    <UserName>Ighor</UserName>
+                                    <UserName>{user.name}</UserName>
                                 </User>
                             </UserInfo>
-                            <LogoutButton onPress={() => { }}>
+                            <LogoutButton onPress={handleLogout}>
                                 <Icon name="power" />
                             </LogoutButton>
                         </UserWrapper>

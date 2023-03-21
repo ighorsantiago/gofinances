@@ -24,20 +24,21 @@ import {
 export function SignIn() {
 
     const [isLoading, setIsLoading] = useState(false)
-    const { signInWithGoogle } = useAuth();
+    const { signInWithGoogle, signInWithApple } = useAuth();
 
     const theme = useTheme();
 
     async function handleSignInWithGoogle() {
 
         try {
-            // setIsLoading(true);
+            setIsLoading(true);
 
             return await signInWithGoogle();
 
         } catch (error) {
 
             Alert.alert('Não foi possível conectar a conta Google');
+        } finally {
             setIsLoading(false);
         }
     }
@@ -47,11 +48,12 @@ export function SignIn() {
         try {
             setIsLoading(true);
 
-            // return await signInWithApple();
+            return await signInWithApple();
 
         } catch (error) {
 
             Alert.alert('Não foi possível conectar a conta Apple');
+        } finally {
             setIsLoading(false);
         }
     }
