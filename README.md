@@ -1,7 +1,7 @@
 <h1 align="center">GoFinances</h1>
 
 <h1 align="center">
-  <img alt="GoFinances" title="#GoFinances" src="./assets/logo.png" />
+  <img alt="GoFinances" title="#GoFinances" src="./assets/logo-redme.png" />
 </h1>
 
 <p align="center">Aplicativo para te ajudar a cuidar das suas finanças</p>
